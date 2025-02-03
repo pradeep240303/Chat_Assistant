@@ -33,6 +33,9 @@ This project is a Python-based chat assistant that interacts with an SQLite data
 - Flask library
 - SQLite3 (comes with Python)
 
+Example Host:
+lucky-babka-c4c18b.netlify.app
+
 ### Steps to Run Locally:
 
 1. **Clone the repository:**
@@ -51,6 +54,7 @@ This project is a Python-based chat assistant that interacts with an SQLite data
 4. **Start the Flask server:**
    ```sh
    python app.py
+   
 
 ## Known Limitations
 
