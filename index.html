@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Query System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Employee Query System</h1>
+        <p class="instructions">Enter a query to get employee details from the database.</p>
+        
+        <div class="query-form">
+            <input type="text" id="userQuery" class="input-field" placeholder="Type your query here..." autofocus>
+            <button id="submitBtn" class="submit-btn">Submit</button>
+        </div>
+
+        <div class="suggestions">
+            <h3>Suggested Queries</h3>
+            <ul>
+                <li onclick="setQuery('Show me all employees in the Sales department')">Show me all employees in the Sales department</li>
+                <li onclick="setQuery('Who is the manager of the Marketing department?')">Who is the manager of the Marketing department?</li>
+                <li onclick="setQuery('List all employees hired after 2022-01-01')">List all employees hired after 2022-01-01</li>
+                <li onclick="setQuery('What is the total salary expense for the Engineering department?')">What is the total salary expense for the Engineering department?</li>
+                <li onclick="setQuery('How many employees are there in the Marketing department?')">How many employees are there in the Marketing department?</li>
+            </ul>
+        </div>
+
+        <div id="response" class="response-box">
+            <p class="response-text">Response will be shown here...</p>
+        </div>
+    </div>
+
+    <script>
+        function setQuery(query) {
+            document.getElementById('userQuery').value = query;
+        }
+
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            const userQuery = document.getElementById('userQuery').value.trim();
+            
+            if (userQuery) {
+
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('submitBtn').textContent = 'Loading...';
+
+                fetch('http://127.0.0.1:5000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query: userQuery })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('response').innerHTML = `<strong>Response:</strong><pre>${data.response}</pre>`;
+                })
+                .catch(error => {
+                    document.getElementById('response').innerHTML = `<strong>Error:</strong><pre>${error}</pre>`;
+                })
+                .finally(() => {
+                    document.getElementById('submitBtn').disabled = false;
+                    document.getElementById('submitBtn').textContent = 'Submit';
+                });
+            } else {
+                document.getElementById('response').innerHTML = '<strong>Error:</strong> Please enter a query.';
+            }
+        });
+    </script>
+</body>
+</html>
