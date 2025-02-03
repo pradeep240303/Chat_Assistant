@@ -7,6 +7,10 @@ This project is a Python-based chat assistant that interacts with an SQLite data
 
 This project is a Python-based chat assistant that interacts with an SQLite database to answer user queries. The assistant processes natural language queries, converts them into SQL, fetches relevant data, and provides a formatted response. The system is built using Flask for handling HTTP requests and SQLite3 as the database engine.
 
+
+Example Host:    lucky-babka-c4c18b.netlify.app
+
+
 ### Features:
 
 - Retrieve employees based on their department.
@@ -33,8 +37,6 @@ This project is a Python-based chat assistant that interacts with an SQLite data
 - Flask library
 - SQLite3 (comes with Python)
 
-Example Host:
-lucky-babka-c4c18b.netlify.app
 
 ### Steps to Run Locally:
 
